@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ── */
+:root {
+  --base:          #0f0f23;
+  --glass-bg:      rgba(255,255,255,0.05);
+  --glass-border:  rgba(255,255,255,0.1);
+  --blue:          #3b82f6;
+  --purple:        #8b5cf6;
+  --green:         #10b981;
+  --text-pri:      rgba(255,255,255,0.9);
+  --text-sec:      rgba(255,255,255,0.45);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--base);
+  color: var(--text-pri);
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Glassmorphism ── */
+@layer components {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--glass-border);
+  }
+  .glass-blue {
+    background: rgba(59,130,246,0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(59,130,246,0.2);
+  }
+  .glass-green {
+    background: rgba(16,185,129,0.07);
+    border-left: 2px solid rgba(16,185,129,0.5);
+    border-radius: 0 10px 10px 0;
+  }
+  .glass-hover {
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+  .glass-hover:hover {
+    background: rgba(255,255,255,0.09);
+    transform: translateY(-2px);
+  }
+}
+
+/* ── Button ── */
+.btn-primary {
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #3b82f6 100%);
+  background-size: 200% 200%;
+  border: none;
+  color: white;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-position 0.4s ease;
+}
+.btn-primary:hover:not(:disabled) {
+  background-position: right center;
+  transform: scale(1.05);
+  box-shadow: 0 0 36px rgba(139,92,246,0.45);
+}
+.btn-primary:active:not(:disabled) { transform: scale(0.95); }
+.btn-primary:disabled { opacity: 0.35; cursor: not-allowed; }
+
+.btn-ghost {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7);
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.12); color: white; }
+.btn-ghost:active { transform: scale(0.96); }
+
+/* ── Textarea ── */
+textarea {
+  outline: none;
+  resize: vertical;
+  background: transparent;
+  color: rgba(255,255,255,0.82);
+  font-family: inherit;
+  line-height: 1.7;
+  font-size: 0.9rem;
+  width: 100%;
+  border: none;
+}
+textarea::placeholder { color: rgba(255,255,255,0.22); }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.14); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.25); }
+
+/* ── Labels ── */
+.eyebrow {
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(96,165,250,0.8);
+}
+.section-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+
+/* ── Line pulse (not in Tailwind keyframes) ── */
+@keyframes linePulse {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.85; }
+}
